@@ -4,6 +4,7 @@ var express = require("express"),
     io = require('socket.io')(http),
     md5 = require('md5');
 
+app.set('port', (process.env.PORT || 3000));
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/css", express.static(__dirname + '/css'));
 
@@ -21,6 +22,10 @@ app.get('/', function(req, res){
             res.status(400).send('Bad Request');
             return;
     }
+});
+
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
 });
 
 var allClients = [];
@@ -48,10 +53,6 @@ io.on('connection', function(socket) {
             client: client
         });
     });
-});
-
-http.listen(process.env.PORT || 3000, function(){
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
 
 function paginate (array, page_size, page_number) {
