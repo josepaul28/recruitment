@@ -97,19 +97,51 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+body {
+    background: #FC466B;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3F5EFB, #FC466B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+body::after {
+    content: '';
+    display: block;
+    height: 80px;
+}
+header input#search_field {
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+    height: 40px;
+    padding: 0 10px;
+}
+.grid-item {
+    padding: 20px;
+    color: white;
+    font-weight: bolder;
+    margin: 5px;
+    border: 1px solid white;
+}
+h1 {
+    font-family: 'Courgette', cursive;
+    color: white;
+    text-align: center;
+    margin-bottom: 0;
+}
+a {
+    color: black;
+}
+footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-height: 80px;
+    min-height: 80px;
+    height: 80px;
+    background-color: #efefef;
+    text-align: center;
+    line-height: 50px;
+}
 
 
 
