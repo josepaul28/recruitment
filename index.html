@@ -1,0 +1,105 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <style>
+            body {
+                background: #FC466B;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to right, #3F5EFB, #FC466B);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to right, #3F5EFB, #FC466B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            }
+            .container input#search_field {
+                width: 80%;
+                margin: 40px auto;
+                display: block;
+                height: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <div class="container">
+            <div>
+                <input id="search_field" type="text" placeholder="Search.. ex.: 192.168.0.1" />
+            </div>
+            <ul id="sources">
+            </ul>
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="js/vendor/jquery-3.2.1.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+
+        <script>
+            var socket = io({
+                autoConnect: false
+            });
+
+            socket.on('clientconnect', function (data) {
+                addIp(data.client);
+            });
+
+            socket.on('clientdisconnect', function (data) {
+                removeIP(data.client);
+            });
+
+            $(document).ready(function () {
+                init();
+
+                $(this).find(".container input#search_field").keyup(function () {
+                    var filter = $(this).val();
+                    $("ul li").each(function () {
+                        if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                            $(this).slideUp();
+                        } else {
+                            $(this).slideDown();
+                        }
+                    });
+                });
+            });
+
+            function init() {
+                //get data for first time
+                console.log("init");
+                $.ajax({
+                    url: "./",
+                    dataType: "json"
+                }).done(function(data) {
+                    $.each(data.clients, function (key, client) {
+                        addIp(client);
+                    });
+                    socket.open();
+                }).fail(function() {
+                    alert( "error" );
+                });
+            }
+
+            function addIp(client) {
+                $sources = $('#sources');
+                if(!$sources.find('li#' + client.id).length) {
+                    $p = $("<li>").html(client.ip).attr('id', client.id);
+                    $sources.prepend($p);
+                }
+            }
+
+            function removeIP(client) {
+                $('#sources').find('li#' + client.id).remove();
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "live_ip_viewer",
+  "version": "1.0.0",
+  "author": "pJ",
+  "description": "Shows a list of IP addresses viewing the page",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josepaul28/recruitment.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "latest",
+    "socket.io": "latest",
+    "md5": "latest"
+  }
+}
