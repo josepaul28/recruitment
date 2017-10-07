@@ -12,5 +12,8 @@
     "express": "latest",
     "socket.io": "latest",
     "md5": "latest"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
