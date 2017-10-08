@@ -2,6 +2,30 @@
 
 Shows a list of IP addresses viewing the page
 
+## Installation instructions
+
+- Make you sure have nodejs installed: <https://nodejs.org/en/download/>
+- Clone the repo: `git clone https://github.com/josepaul28/recruitment.git`
+- Go to the project directory `cd recruitment`
+- Install all the project dependencies `npm install`
+- Release the Beast 🦑 `node index.js` and type <http://127.0.0.1:3000> in your browser. 
+- Buy me a beer 🍻
+
+You don't have a time? Check it out the live **[Demo](https://ip-socket.herokuapp.com)**
+
+___Special thanks to [Heroku](http://heroku.com/) for the free nodejs hosting.___
+
+The solution is completely responsive, so feel free to test it on your favorite device too ;)
+
+You can search across all the listed ip address by typing in the search field.
+
+### FAQS
+
+Why the ip addresses have an ::ffff: prepended?
+
+Read this post -> <https://stackoverflow.com/a/33790357> 
+
+
 ## Requirements
 
 Create a single-page web app that:
