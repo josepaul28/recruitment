@@ -20,11 +20,16 @@ $(document).ready(function () {
 
     $(this).find("header input#search_field").keyup(function () {
         var filter = $(this).val();
+        $sources = $('#sources');
         $("div#sources > div").each(function () {
             if ($(this).find('span').text().search(new RegExp(filter, "i")) < 0) {
-                $(this).slideUp();
+                $(this).slideUp('fast', function () {
+                    $sources.isotope('layout');
+                });
             } else {
-                $(this).slideDown();
+                $(this).slideDown('fast', function () {
+                    $sources.isotope('layout');
+                });
             }
         });
     });
