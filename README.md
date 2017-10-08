@@ -19,6 +19,8 @@ The solution is completely responsive, so feel free to test it on your favorite 
 
 You can search across all the listed ip address by typing in the search field.
 
+To close your connection to the socket and remove the ip from the list, just close the browser or the browser tab.
+
 ### FAQS
 
 Why the ip addresses have an ::ffff: prepended?

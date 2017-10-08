@@ -13,6 +13,11 @@ socket.on('clientdisconnect', function (data) {
 $(document).ready(function () {
     init();
 
+    $('#sources').isotope({
+        itemSelector: '.grid-item',
+        layoutMode: 'fitRows'
+    });
+
     $(this).find("header input#search_field").keyup(function () {
         var filter = $(this).val();
         $("div#sources > div").each(function () {
@@ -26,7 +31,6 @@ $(document).ready(function () {
 });
 
 function init() {
-    //get data for first time
     console.log("init");
     $.ajax({
         url: "./",
@@ -39,25 +43,16 @@ function init() {
     }).fail(function() {
         alert( "error" );
     });
-
-    $('.grid').isotope({
-        // options
-        itemSelector: '.grid-item',
-        layoutMode: 'fitRows'
-    });
 }
 
 function addIp(client) {
     console.log("addIp");
     $sources = $('#sources');
     if(!$sources.find('div#' + client.id).length) {
-        //$p = $("<li>").html(client.ip).attr('id', client.id);
-        var $items = $(getMarkupFromData(client));
+        var $item = $(getMarkupFromData(client));
         $sources.prepend(
-            $items
-        ).isotope( 'prepended', $items );
-    } else {
-        console.log("aun esta");
+            $item
+        ).isotope('prepended', $item);
     }
 }
 
@@ -65,10 +60,7 @@ function removeIP(client) {
     console.log("removeIP");
     $sources = $('#sources');
     $sources.find('div#' + client.id).remove();
-    $sources.isotope('layout')
-    //$('#sources').isotope( 'remove', $('#sources').find('div#' + client.id) )
-    // layout remaining item elements
-    //  .isotope('layout');
+    $sources.isotope('layout');
 }
 
 function getMarkupFromData(client) {
